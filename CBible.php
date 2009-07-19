@@ -5,8 +5,42 @@
 		//! Should we get whole chapter?
 		private $whole_chapter = false;
 
+		// Default language
+		private $language = 'FinPR';
+
 		//! Here we download temporary page
 		private $file = 'bible.txt';
+
+		// *********************************************
+		//	set_language
+		//
+		//	@brief Set language to use
+		//
+		//	@param $val Language. Valid values are:
+		//		'finnish', 'old_finnish', 'english'
+		//
+		// *********************************************
+		public function set_language( $val )
+		{
+			switch( strtolower( $val ) )
+			{
+				// Raamattu 1933/38
+				default:
+				case 'finnish':
+					$this->language = 'FinPR';
+					break;
+
+				// Biblia 1776
+				case 'old_finnish':
+					$this->language = 'FinBiblia';
+					break;
+
+				// Young's literal
+				case 'english':
+					$this->language = 'YLT';
+					break;
+			}
+		}
 
 		// *********************************************
 		//	whole_chapter
@@ -105,6 +139,9 @@
 
 			// Download temporary file
 			$ch = curl_init();
+			curl_setopt( $ch, CURLOPT_POST, 1 );
+			curl_setopt( $ch, CURLOPT_POSTFIELDS, "mod1="
+				. $this->language );
 			curl_setopt( $ch, CURLOPT_FILE, $file );
 			curl_setopt( $ch, CURLOPT_URL, $url );
 			curl_exec( $ch );

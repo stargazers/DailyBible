@@ -12,18 +12,21 @@ koko sen luvun, josta kyseinen Sana on otettu.
 
 == Käyttö ==
 
+=== Peruskäyttö ===
 Käynnistä ohjelma kirjoittamalla:
 
 ----
 php bible.php
 ----
 
+=== Koko luvun näyttö ===
 Jos haluat koko luvun, käynnistä ohjelma kirjoittamalla:
 
 ----
 php bible.php --whole_chapter
 ----
 
+=== Päivän Sana vain kerran päivässä ===
 Jos haluat että ohjelma näyttää Päivän Sanan vain kerran päivässä, voit
 antaa ohjelmalle parametriksi --only_once. 
 
@@ -52,3 +55,13 @@ alias dailybible='php /home/stargazers/bible/bible.php'
 -----
 Muista korvata polku oikealla.
 ____
+
+=== Kielen vaihto ===
+
+Voit halutessasi käyttää eri kieltä. Vaihtoehdot ovat 'finnish' (oletus),
+'old_finnish' (Biblia) sekä 'english' (Young's literal).
+
+Käynnistä ohjelma kirjoittamalla:
+----
+php bible.php --language english
+----

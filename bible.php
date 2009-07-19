@@ -11,6 +11,11 @@
 	{
 		switch( $argv[$i] )
 		{
+			case '--language':
+				if( isset( $argv[$i+1] ) )
+					$x->set_language( $argv[$i+1] );
+				break;
+
 			// User wanted the whole chapter
 			case '--whole_chapter':
 				$x->whole_chapter( true );

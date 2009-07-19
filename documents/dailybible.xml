@@ -20,12 +20,20 @@ koko sen luvun, josta kyseinen Sana on otettu.</simpara>
 </section>
 <section id="_k_ytt">
 <title>Käyttö</title>
+<section id="_perusk_ytt">
+<title>Peruskäyttö</title>
 <simpara>Käynnistä ohjelma kirjoittamalla:</simpara>
 
 <screen>php bible.php</screen>
+</section>
+<section id="_koko_luvun_n_ytt">
+<title>Koko luvun näyttö</title>
 <simpara>Jos haluat koko luvun, käynnistä ohjelma kirjoittamalla:</simpara>
 
 <screen>php bible.php --whole_chapter</screen>
+</section>
+<section id="_p_iv_n_sana_vain_kerran_p_iv_ss">
+<title>Päivän Sana vain kerran päivässä</title>
 <simpara>Jos haluat että ohjelma näyttää Päivän Sanan vain kerran päivässä, voit
 antaa ohjelmalle parametriksi &#8212;only_once.</simpara>
 
@@ -51,5 +59,15 @@ muuhun shellisi konfigurointitiedostoon) loppuun:</simpara></tip>
 <simpara>Muista korvata polku oikealla.</simpara>
 
 </blockquote>
+</section>
+<section id="_kielen_vaihto">
+<title>Kielen vaihto</title>
+<simpara>Voit halutessasi käyttää eri kieltä. Vaihtoehdot ovat <emphasis>finnish</emphasis> (oletus),
+<emphasis>old_finnish</emphasis> (Biblia) sekä <emphasis>english</emphasis> (Young's literal).</simpara>
+
+<simpara>Käynnistä ohjelma kirjoittamalla:</simpara>
+
+<screen>php bible.php --language english</screen>
+</section>
 </section>
 </article>
