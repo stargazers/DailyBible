@@ -1,0 +1,48 @@
+= Daily Bible =
+
+Ohjelmoinut: Aleksi Räsänen <aleksi.rasanen@runosydan.net>
+
+== Lyhyesti ==
+
+Daily Bible on PHP-ohjelma, joka hakee raamattu.uskonkirjat.net 
+sivustolta päivän sanan.
+
+Ohjelma voi hakea joko valitun Päivän Sanan tai vaihtoehtoisesti
+koko sen luvun, josta kyseinen Sana on otettu.
+
+== Käyttö ==
+
+Käynnistä ohjelma kirjoittamalla:
+
+----
+php bible.php
+----
+
+Jos haluat koko luvun, käynnistä ohjelma kirjoittamalla:
+
+----
+php bible.php --whole_chapter
+----
+
+Jos haluat että ohjelma näyttää Päivän Sanan vain kerran päivässä, voit
+antaa ohjelmalle parametriksi --only_once. 
+
+----
+php bible.php --only_once
+----
+
+Tämä luo kotikansioosi
+tiedoston .bible.txt jossa on tämä päivä muodossa VV-KK-PVM. Ohjelma
+tarkistaa aina alussa onko kyseinen tiedosto olemassa (jos siis on
+annettu parametri --only_once), ja jos on, täsmääkö tiedostossa oleva
+päivä nykyisen päivän kanssa. Jos täsmää, ei Päivän Sanaa näytetä
+enää toista kertaa saman päivän aikana.
+
+Tämän parametrin tarkoitus on antaa mahdollisuus laittaa ohjelma
+käynnistymään aina .bashrc tai .zshrc jne. tiedostojen lopussa, mutta
+siten, että jokaisella shellin avauksella ei kuitenkaan Päivän Sanaa
+näytettäisi, vaan ainoastaan ensimmäisellä kertaa päivässä.
+
+TIP: On kätevää luoda alias shelliin ohjelmalle, jolloin aina ei 
+tarvitse antaa php + polku + ohjelma, vaan voit kirjoittaa suoraan
+esim. dailybible

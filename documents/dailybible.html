@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Daily Bible</title><link rel="stylesheet" href="./docbook-xsl.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.73.2" /></head><body><div class="article" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="id2840280"></a>Daily Bible</h2></div></div><hr /></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#_lyhyesti">1. Lyhyesti</a></span></dt><dt><span class="section"><a href="#_k_ytt">2. Käyttö</a></span></dt></dl></div><p>Ohjelmoinut: Aleksi Räsänen &lt;<a class="ulink" href="mailto:aleksi.rasanen@runosydan.net" target="_top">aleksi.rasanen@runosydan.net</a>&gt;</p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_lyhyesti"></a>1. Lyhyesti</h2></div></div></div><p>Daily Bible on PHP-ohjelma, joka hakee raamattu.uskonkirjat.net
+sivustolta päivän sanan.</p><p>Ohjelma voi hakea joko valitun Päivän Sanan tai vaihtoehtoisesti
+koko sen luvun, josta kyseinen Sana on otettu.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_k_ytt"></a>2. Käyttö</h2></div></div></div><p>Käynnistä ohjelma kirjoittamalla:</p><pre class="screen">php bible.php</pre><p>Jos haluat koko luvun, käynnistä ohjelma kirjoittamalla:</p><pre class="screen">php bible.php --whole_chapter</pre><p>Jos haluat että ohjelma näyttää Päivän Sanan vain kerran päivässä, voit
+antaa ohjelmalle parametriksi —only_once.</p><pre class="screen">php bible.php --only_once</pre><p>Tämä luo kotikansioosi
+tiedoston .bible.txt jossa on tämä päivä muodossa VV-KK-PVM. Ohjelma
+tarkistaa aina alussa onko kyseinen tiedosto olemassa (jos siis on
+annettu parametri —only_once), ja jos on, täsmääkö tiedostossa oleva
+päivä nykyisen päivän kanssa. Jos täsmää, ei Päivän Sanaa näytetä
+enää toista kertaa saman päivän aikana.</p><p>Tämän parametrin tarkoitus on antaa mahdollisuus laittaa ohjelma
+käynnistymään aina .bashrc tai .zshrc jne. tiedostojen lopussa, mutta
+siten, että jokaisella shellin avauksella ei kuitenkaan Päivän Sanaa
+näytettäisi, vaan ainoastaan ensimmäisellä kertaa päivässä.</p><div class="tip" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="icons/tip.png" /></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>On kätevää luoda alias shelliin ohjelmalle, jolloin aina ei
+tarvitse antaa php <code class="literal"> polku </code> ohjelma, vaan voit kirjoittaa suoraan
+esim. dailybible</p></td></tr></table></div></div></div></body></html>

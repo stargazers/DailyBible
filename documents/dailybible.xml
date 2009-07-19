@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN" "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+
+<article lang="en">
+<articleinfo>
+    <title>Daily Bible</title>
+
+
+</articleinfo>
+<simpara>Ohjelmoinut: Aleksi Räsänen &lt;<ulink url="mailto:aleksi.rasanen@runosydan.net">aleksi.rasanen@runosydan.net</ulink>&gt;</simpara>
+
+<section id="_lyhyesti">
+<title>Lyhyesti</title>
+<simpara>Daily Bible on PHP-ohjelma, joka hakee raamattu.uskonkirjat.net
+sivustolta päivän sanan.</simpara>
+
+<simpara>Ohjelma voi hakea joko valitun Päivän Sanan tai vaihtoehtoisesti
+koko sen luvun, josta kyseinen Sana on otettu.</simpara>
+
+</section>
+<section id="_k_ytt">
+<title>Käyttö</title>
+<simpara>Käynnistä ohjelma kirjoittamalla:</simpara>
+
+<screen>php bible.php</screen>
+<simpara>Jos haluat koko luvun, käynnistä ohjelma kirjoittamalla:</simpara>
+
+<screen>php bible.php --whole_chapter</screen>
+<simpara>Jos haluat että ohjelma näyttää Päivän Sanan vain kerran päivässä, voit
+antaa ohjelmalle parametriksi &#8212;only_once.</simpara>
+
+<screen>php bible.php --only_once</screen>
+<simpara>Tämä luo kotikansioosi
+tiedoston .bible.txt jossa on tämä päivä muodossa VV-KK-PVM. Ohjelma
+tarkistaa aina alussa onko kyseinen tiedosto olemassa (jos siis on
+annettu parametri &#8212;only_once), ja jos on, täsmääkö tiedostossa oleva
+päivä nykyisen päivän kanssa. Jos täsmää, ei Päivän Sanaa näytetä
+enää toista kertaa saman päivän aikana.</simpara>
+
+<simpara>Tämän parametrin tarkoitus on antaa mahdollisuus laittaa ohjelma
+käynnistymään aina .bashrc tai .zshrc jne. tiedostojen lopussa, mutta
+siten, että jokaisella shellin avauksella ei kuitenkaan Päivän Sanaa
+näytettäisi, vaan ainoastaan ensimmäisellä kertaa päivässä.</simpara>
+
+<tip><simpara>On kätevää luoda alias shelliin ohjelmalle, jolloin aina ei
+tarvitse antaa php <literal> polku </literal> ohjelma, vaan voit kirjoittaa suoraan
+esim. dailybible</simpara></tip>
+</section>
+</article>
