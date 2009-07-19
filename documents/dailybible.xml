@@ -42,8 +42,14 @@ käynnistymään aina .bashrc tai .zshrc jne. tiedostojen lopussa, mutta
 siten, että jokaisella shellin avauksella ei kuitenkaan Päivän Sanaa
 näytettäisi, vaan ainoastaan ensimmäisellä kertaa päivässä.</simpara>
 
+<blockquote>
 <tip><simpara>On kätevää luoda alias shelliin ohjelmalle, jolloin aina ei
 tarvitse antaa php <literal> polku </literal> ohjelma, vaan voit kirjoittaa suoraan
-esim. dailybible</simpara></tip>
+esim. dailybible. Tämän voit tehdä kirjoittamalla tiedoston .bashrc (tai
+muuhun shellisi konfigurointitiedostoon) loppuun:</simpara></tip>
+<screen>alias dailybible='php /home/stargazers/bible/bible.php'</screen>
+<simpara>Muista korvata polku oikealla.</simpara>
+
+</blockquote>
 </section>
 </article>
