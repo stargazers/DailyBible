@@ -11,6 +11,7 @@
 	{
 		switch( $argv[$i] )
 		{
+			// User wants to use another language
 			case '--language':
 				if( isset( $argv[$i+1] ) )
 					$x->set_language( $argv[$i+1] );

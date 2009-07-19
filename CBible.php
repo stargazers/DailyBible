@@ -9,7 +9,7 @@
 		private $language = 'FinPR';
 
 		//! Here we download temporary page
-		private $file = 'bible.txt';
+		private $file = '/tmp/bible.txt';
 
 		// *********************************************
 		//	set_language
