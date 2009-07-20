@@ -202,15 +202,42 @@
 				{
 					$tmp = explode( '>', $cur );
 
-					// Third element is the Bible verse.
-					if( isset( $tmp[3] ) )
+					// If there is text "font" in this line too,
+					// then we need to get 5th part. Otherwise part
+					// what we need is third.
+					if( strstr( $cur, '<font' ) != false )
+						$pos = 5;
+					else
+						$pos = 3;
+
+					if( isset( $tmp[$pos] ) )
 					{
-						$tmp = explode( '<', $tmp[3] );
+						// By default we do not need this, because
+						// it is in the text already.
+						$verse_num = -1;
+
+						// If there was text font in this line, 
+						// then we need to get correct verse number 
+						// using different way.
+						if( strstr( $cur, '<font' ) != false )
+						{
+							$nums = explode( '<', $tmp[3] );
+							$verse_num = $nums[0];
+						}
+
+						$tmp = explode( '<', $tmp[$pos] );
 						$tmp = html_entity_decode( $tmp[0] );
 
 						// Do not add empty lines!
 						if( strlen( $tmp ) > 1 )
+						{
+							// If we have get manually verse number,
+							// then we must add it before the line.
+							if( $verse_num != -1 )
+								$tmp = $verse_num . $tmp;
+
 							$verses[] = $tmp;
+						}
 					}
 				}
 			}
