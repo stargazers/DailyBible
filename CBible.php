@@ -11,6 +11,9 @@
 		//! Here we download temporary page
 		private $file = '/tmp/bible.txt';
 
+		//! Verse to search
+		private $search_verse = '';
+
 		// *********************************************
 		//	set_language
 		//
@@ -40,6 +43,20 @@
 					$this->language = 'YLT';
 					break;
 			}
+		}
+
+		// *********************************************
+		//	verse
+		//
+		//	@brief Set verse to show
+		//
+		//	@param $verse Exact verse or a range.
+		//		For example "Joh. 3:16"
+		//
+		// *********************************************
+		public function verse( $verse )
+		{
+			$this->search_verse = $verse;
 		}
 
 		// *********************************************
@@ -140,8 +157,17 @@
 			// Download temporary file
 			$ch = curl_init();
 			curl_setopt( $ch, CURLOPT_POST, 1 );
-			curl_setopt( $ch, CURLOPT_POSTFIELDS, "mod1="
-				. $this->language );
+
+			// Language to use
+			$post_values = 'mod1=' . $this->language;
+
+			// If user has searched some chapter, then we just
+			// put that chapter here in post values.
+			if( $this->search_verse != "" )
+				$post_values .= '&ref=' . $this->search_verse;
+
+			curl_setopt( $ch, CURLOPT_POSTFIELDS, $post_values );
+
 			curl_setopt( $ch, CURLOPT_FILE, $file );
 			curl_setopt( $ch, CURLOPT_URL, $url );
 			curl_exec( $ch );

@@ -16,6 +16,9 @@
 		echo "   Näyttää vain kerran päivässä Päivän Sanan. Tämä on\n";
 		echo "   tarkoitettu jos halutaan lisätä ohjelma .bashrc tai\n";
 		echo "   vastaavan loppuun.\n";
+		echo " --chapter 'Joh. 3:16'\n";
+		echo "   Näyttää halutun kappaleen, esim. Johannes 3:16\n";
+		echo "   Tähän voidaan antaa myös alue, esim. 'Joh 3:2-12'\n";
 		echo " --help\n";
 		echo "   Näyttää tämän ohjeen.\n";
 		echo "\n";
@@ -50,6 +53,30 @@
 				$x->whole_chapter( true );
 				break;
 
+			// User wanted to search some chapter and verse,
+			// eg. Joh 3:16
+			case '--verse':
+				// --verse requires parameter what chapter and verse
+				// we want to search, so check it.
+				if( isset( $argv[$i+1] ) )
+				{
+					$x->verse( $argv[$i+1] );
+				}
+				// Not enough parameters, show some samples how to
+				// use that parameter --verse correctly.
+				else
+				{
+					echo 'If you use --verse, you must give a verse '
+						. 'as an parameter!' . "\n";
+					echo 'Example: ' . $argv[0] . ' --verse "Saarn. 1:2"'
+						. "\n\n";
+					echo 'You can set ranges too: ' . "\n";
+					echo 'Example: ' . $argv[0] 
+						. ' --verse "Ilm. 13:16-18"' . "\n";
+					die();
+				}	
+				break;
+				
 			// User wants to see Daily Verse only once in a day.
 			case '--only_once':
 				$only_once = true;
