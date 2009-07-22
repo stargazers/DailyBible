@@ -16,7 +16,7 @@
 		echo "   Näyttää vain kerran päivässä Päivän Sanan. Tämä on\n";
 		echo "   tarkoitettu jos halutaan lisätä ohjelma .bashrc tai\n";
 		echo "   vastaavan loppuun.\n";
-		echo " --chapter 'Joh. 3:16'\n";
+		echo " --verse 'Joh. 3:16'\n";
 		echo "   Näyttää halutun kappaleen, esim. Johannes 3:16\n";
 		echo "   Tähän voidaan antaa myös alue, esim. 'Joh 3:2-12'\n";
 		echo " --help\n";
