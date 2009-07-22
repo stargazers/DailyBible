@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 	
 	function show_help( $argv )
