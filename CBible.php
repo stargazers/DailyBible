@@ -14,6 +14,9 @@
 		//! Verse to search
 		private $search_verse = '';
 
+		//! If we don't want chapter numbers
+		private $without_numbers = false;
+
 		// *********************************************
 		//	set_language
 		//
@@ -43,6 +46,20 @@
 					$this->language = 'YLT';
 					break;
 			}
+		}
+
+		// *********************************************
+		//	without_numbers
+		//
+		//	@brief Sets if user wants text wihtout chapter
+		//		numbers on it.
+		//
+		//	@param $val True or False.
+		//
+		// *********************************************
+		public function without_numbers( $val )
+		{
+			$this->without_numbers = $val;
 		}
 
 		// *********************************************
@@ -261,6 +278,14 @@
 							// then we must add it before the line.
 							if( $verse_num != -1 )
 								$tmp = $verse_num . $tmp;
+
+							// If user did not want chapter numbers
+							// on text, then we remove them here.
+							if( $this->without_numbers )
+							{
+								$tmp = trim( preg_replace( '/^[0-9]*/', '', 
+									$tmp ) );
+							}
 
 							$verses[] = $tmp;
 						}

@@ -20,6 +20,8 @@
 		echo " --verse 'Joh. 3:16'\n";
 		echo "   Näyttää halutun kappaleen, esim. Johannes 3:16\n";
 		echo "   Tähän voidaan antaa myös alue, esim. 'Joh 3:2-12'\n";
+		echo " --without_numbers\n";
+		echo "   Poistaa rivin alusta kappaleiden numerot.\n";
 		echo " --help\n";
 		echo "   Näyttää tämän ohjeen.\n";
 		echo "\n";
@@ -47,6 +49,11 @@
 			case '--language':
 				if( isset( $argv[$i+1] ) )
 					$x->set_language( $argv[$i+1] );
+				break;
+
+			// User wants text without chapter numbers
+			case '--without_numbers':
+				$x->without_numbers( true );
 				break;
 
 			// User wanted the whole chapter
