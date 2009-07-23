@@ -69,5 +69,28 @@ muuhun shellisi konfigurointitiedostoon) loppuun:</simpara></tip>
 
 <screen>php bible.php --language english</screen>
 </section>
+<section id="_raamatunjakeen_haku">
+<title>Raamatunjakeen haku</title>
+<simpara>Voit etsiä haluamaasi kohtaa antamalla parametrin &#8212;verse.</simpara>
+
+<screen>php bible.php --verse "Joh. 3:16"</screen>
+<simpara>Voit myös hakea alueita.</simpara>
+
+<screen>php bible.php --verse "Ilm. 13:16-18"</screen>
+</section>
+<section id="_jaenumeroiden_piilottaminen">
+<title>Jaenumeroiden piilottaminen</title>
+<simpara>Jos et halua että jakeiden numerot tulevat mukaan tekstiin, voit
+antaa parametrin &#8212;without_numbers. Tällöin teksti tulostuu ilman
+että jaenumeroita on mukana.</simpara>
+
+<simpara>HUOM! Mikäli käytät CBible.php luokkaa omissa ohjelmissasi, huomaa että
+mikäli on annettu tieto että ei haluta jakeiden numeroita näyttää, on
+silloin tieto jakeiden numeroista taulukon indeksin numerona!</simpara>
+
+<simpara>Eli. jos haet vaikka Joh 3:16 tekstin on paluuarvon taulukossa indeksin
+numero 16 missä on kyseinen teksti!</simpara>
+
+</section>
 </section>
 </article>

@@ -65,3 +65,28 @@ Käynnistä ohjelma kirjoittamalla:
 ----
 php bible.php --language english
 ----
+
+=== Raamatunjakeen haku ===
+
+Voit etsiä haluamaasi kohtaa antamalla parametrin --verse.
+----
+php bible.php --verse "Joh. 3:16"
+----
+
+Voit myös hakea alueita.
+----
+php bible.php --verse "Ilm. 13:16-18"
+----
+
+=== Jaenumeroiden piilottaminen ===
+
+Jos et halua että jakeiden numerot tulevat mukaan tekstiin, voit
+antaa parametrin --without_numbers. Tällöin teksti tulostuu ilman
+että jaenumeroita on mukana.
+
+HUOM! Mikäli käytät CBible.php luokkaa omissa ohjelmissasi, huomaa että
+mikäli on annettu tieto että ei haluta jakeiden numeroita näyttää, on 
+silloin tieto jakeiden numeroista taulukon indeksin numerona!
+
+Eli. jos haet vaikka Joh 3:16 tekstin on paluuarvon taulukossa indeksin
+numero 16 missä on kyseinen teksti!

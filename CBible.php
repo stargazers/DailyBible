@@ -283,11 +283,24 @@
 							// on text, then we remove them here.
 							if( $this->without_numbers )
 							{
+								// Get the verse number
+								$arr = explode( ' ', $tmp );
+								$num = $arr[0];
+
+								// Remove verse number from text.
 								$tmp = trim( preg_replace( '/^[0-9]*/', '', 
 									$tmp ) );
-							}
 
-							$verses[] = $tmp;
+								// Verse number must be used as a key 
+								// numberif user wanted text 
+								// without verse numbers
+								$verses[$num] = $tmp;
+							}
+							// Just add text with verse numbers.
+							else
+							{
+								$verses[] = $tmp;
+							}
 						}
 					}
 				}
