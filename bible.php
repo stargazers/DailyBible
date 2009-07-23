@@ -1,6 +1,120 @@
 #!/usr/bin/php
 <?php
 	
+	include 'settings.php';
+	include 'CBible.php';
+
+	// By default user did not gave param --list_verses
+	$list_verses = false;
+
+	// If user wanted to list old verses, then this keep info
+	// if we must print also the text, not only the chapter and 
+	// verse number.
+	$text_too = false;
+
+
+	// *********************************************
+	//	list_verses
+	//
+	//	@brief List old verses
+	//
+	//	@param $settings Application settings
+	//
+	//	@param $text_too Should we print the text too?
+	//
+	// *********************************************
+	function list_verses( $settings, $text_too )
+	{
+		$tmp = $settings['app_files'] . '/daily_verses.txt';
+
+		// If history file is not found
+		if(! file_exists( $tmp ) )
+		{
+			echo "No verse history found, yet.\n\n";
+			return;
+		}
+
+		$data = file( $tmp );
+
+		foreach( $data as $cur )
+		{
+			// Values are separated with | char in file
+			$arr = explode( '|', $cur );
+
+			// Bible text is in array what is serialized
+			$data_array = unserialize( $arr[1] );
+
+			// Day when this was the verse of the Day
+			$day = $arr[0];
+
+			// In file the verse number MUST be written in the text,
+			// even when using --without_numbers, so now we can get the
+			// first verse number
+			$tmp_arr = explode( ' ', $data_array[0] );
+			$verse_num = $tmp_arr[0];
+			unset( $tmp_arr );
+
+			// How many verses was on the Verse of the day?
+			// Remove 1 because one is reserved for chapter name.
+			$num_verses = sizeof( $data_array ) -1;
+
+			// Show day and the name of the chapter
+			echo "\t" . $day . "\t" . $data_array['chapter'];
+
+			// Show verse number
+			echo ":" . $verse_num;
+
+			// Show end verse too, eg. show range.
+			if( $num_verses > 1 )
+				echo '-' . ( $verse_num + ( $num_verses -1 ) );
+
+			echo  "\n";
+
+			// User wanted to see text too
+			if( $text_too )
+			{
+				echo "\n";
+
+				// List all verses
+				for( $i=0; $i < $num_verses; $i++ )
+					echo wordwrap( $data_array[$i] ) . "\n";
+				
+				echo "\n";
+			}
+
+		}
+		echo "\n";
+	}
+
+	function write_daily_verse( $settings, $data )
+	{
+		// File where verses of the Day are stored
+		$tmp = $settings['app_files'] . '/daily_verses.txt';
+
+		// If that file exists, then check if we have already
+		// written this day verse in the file.
+		if( file_exists( $tmp ) )
+		{
+			// Read file to array
+			$arr = file( $tmp );
+
+			// Loop line by line. If this day is found in file, then
+			// we have to return without re-writing data.
+			foreach( $arr as $cur )
+			{
+				// We have wrote verse already. Just skip this now.
+				if( strstr( $cur, date( 'Y-m-d' ) ) != false )
+					return;
+			}
+		}
+
+		// Add verse of the day to file.
+		$fh = fopen( $tmp, 'a+' );
+		$line = date( 'Y-m-d' ) . '|' . serialize( $data );
+		fwrite( $fh, $line );
+		fclose( $fh );
+	}
+
 	function show_help( $argv )
 	{
 		echo "DailyBible\n\n";
@@ -22,6 +136,8 @@
 		echo "   Tähän voidaan antaa myös alue, esim. 'Joh 3:2-12'\n";
 		echo " --without_numbers\n";
 		echo "   Poistaa rivin alusta kappaleiden numerot.\n";
+		echo " --list_verses\n";
+		echo "   Listaa aikaisemmat päivän Sanat mitä cachessa on.\n";
 		echo " --help\n";
 		echo "   Näyttää tämän ohjeen.\n";
 		echo "\n";
@@ -29,11 +145,17 @@
 		die();
 	}
 
-	include 'CBible.php';
-	$x = new CBible();
+	function check_folders( $settings )
+	{
+		// Create folder for settings and cache etc. if not exists
+		if(! file_exists( $settings['app_files'] ) )
+			mkdir( $settings['app_files'], 0755 );
+	}
 
-	// Read home dir with exec... maybe there is better way?
-	$path = exec( 'echo $HOME' );
+	// Check if folders for cache and temporary files exists
+	check_folders( $settings );
+
+	$x = new CBible();
 
 	// Check command line arguments.
 	for( $i=0; $i < $argc; $i++ )
@@ -85,12 +207,22 @@
 				}	
 				break;
 				
+			// List old verses
+			case '--list_verses':
+				$list_verses = true;
+				break;
+
+			// If user wants the bible text too when using --list_verses
+			case '--text_too':
+				$text_too = true;
+				break;
+
 			// User wants to see Daily Verse only once in a day.
 			case '--only_once':
 				$only_once = true;
 
 				// Temporary file
-				$tmp = $path . '/.bible.txt';
+				$tmp = $settings['app_files'] . '/bible.txt';
 
 				// Is there temporary file? If so, then
 				// just check if there is this day in that temporary
@@ -109,16 +241,24 @@
 		}
 	}
 
+	// User wanted to list old verses
+	if( $list_verses )
+	{
+		list_verses( $settings, $text_too );
+		die();
+	}
+
 	$ret = $x->get_verse();
 
 	echo $ret['chapter'] . "\n";
 	echo str_pad( '-', strlen( $ret['chapter'] ), '-', STR_PAD_LEFT );
 	echo "\n\n";
 
+	// Print verses
 	foreach( $ret as $key => $val )
 	{
 		if( is_numeric( $key ) )
-			echo $val . "\n";
+			echo wordwrap( $val ) . "\n";
 	}
 
 	// If user wants Daily Verse only once in a day, then we must
@@ -126,9 +266,14 @@
 	// don't show Daily Verse again.
 	if( $only_once )
 	{
-		$fh = fopen( $path . '/.bible.txt', 'w' );
+		$fh = fopen( $settings['app_files'] . '/bible.txt', 'w' );
 		fwrite( $fh, date( 'Y-m-d' ) );
 		fclose( $fh );
 	}
 
+	// If user has not given any arguments, then we can check
+	// if we must write this Daily Verse to cache file too, eg.
+	// later user are able to use --list-verses to see daily verses
+	if( $argc < 2 )
+		write_daily_verse( $settings, $ret );
 ?>
