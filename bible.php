@@ -110,7 +110,7 @@
 
 		// Add verse of the day to file.
 		$fh = fopen( $tmp, 'a+' );
-		$line = date( 'Y-m-d' ) . '|' . serialize( $data );
+		$line = date( 'Y-m-d' ) . '|' . serialize( $data ) . "\n";
 		fwrite( $fh, $line );
 		fclose( $fh );
 	}
@@ -138,6 +138,10 @@
 		echo "   Poistaa rivin alusta kappaleiden numerot.\n";
 		echo " --list_verses\n";
 		echo "   Listaa aikaisemmat päivän Sanat mitä cachessa on.\n";
+		echo " --text_too\n";
+		echo "   Mikäli käytetään --list_verses parametriä, silloin\n";
+		echo "   tällä parametrillä saadaan kerrottua että haluamme\n";
+		echo "   nähdä myös jakeiden tekstit\n";
 		echo " --help\n";
 		echo "   Näyttää tämän ohjeen.\n";
 		echo "\n";
@@ -274,6 +278,9 @@
 	// If user has not given any arguments, then we can check
 	// if we must write this Daily Verse to cache file too, eg.
 	// later user are able to use --list-verses to see daily verses
-	if( $argc < 2 )
+	// NOTE! We still must check if --only_once is given, because if
+	// is is given, then we still need to write this to file...
+	if( ( $argc < 2 ) || in_array( '--only_once', $argv ) )
 		write_daily_verse( $settings, $ret );
+	
 ?>
