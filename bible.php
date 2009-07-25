@@ -1,5 +1,23 @@
 #!/usr/bin/php
 <?php
+	/*
+	DailyBible CLI interface
+	This file is part of DailyBible
+	Copyright (C) 2009 Aleksi Räsänen <aleksi.rasanen@runosydan.net>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	*/
 	
 	include 'settings.php';
 	include 'CBible.php';
@@ -86,6 +104,16 @@
 		echo "\n";
 	}
 
+	// *********************************************
+	//	write_daily_verse
+	//
+	//	@brief Write daily verse to file
+	//
+	//	@param $settings Array of files
+	//
+	//	@param $data Data, eg. Bible verse etc.
+	//
+	// *********************************************
 	function write_daily_verse( $settings, $data )
 	{
 		// File where verses of the Day are stored
@@ -115,6 +143,14 @@
 		fclose( $fh );
 	}
 
+	// *********************************************
+	//	show_help
+	//
+	//	@brief Show --help 
+	//
+	//	@param $argv Given command line arguments
+	//
+	// *********************************************
 	function show_help( $argv )
 	{
 		echo "DailyBible\n\n";
@@ -149,6 +185,14 @@
 		die();
 	}
 
+	// *********************************************
+	//	check_folders
+	//
+	//	@brief Checks if folders exists
+	//
+	//	@param $settings Array of files
+	//
+	// *********************************************
 	function check_folders( $settings )
 	{
 		// Create folder for settings and cache etc. if not exists
